@@ -83,8 +83,14 @@ static inline double dot_product(const Vector3D *a, const Vector3D *b) {
 
 static inline Vector3D cross_product(const Vector3D *a, const Vector3D *b) {
   Vector3D result;
+
   result.x = a->y * b->z - a->z * b->y;
   result.y = a->z * b->x - a->x * b->z;
   result.z = a->x * b->y - a->y * b->x;
+
   return result;
+}
+
+static inline double vector_magnitude(const Vector3D *v) {
+  return sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
 }
