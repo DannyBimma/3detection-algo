@@ -75,3 +75,8 @@ typedef struct {
   int count;
   int capacity;
 } ComponentArray;
+
+/* Vector operation function definitions */
+static inline double dot_product(const Vector3D *a, const Vector3D *b) {
+  return a->x * b->x + a->y * b->y + a->z * b->z;
+}
