@@ -110,3 +110,13 @@ static inline Vector3D normalise_vector(const Vector3D *v) {
 
   return result;
 }
+
+static inline Vector3D subtract_vectors(const Vector3D *a, const Vector3D *b) {
+  Vector3D result;
+
+  result.x = a->x - b->x;
+  result.y = a->y - b->y;
+  result.z = a->z - b->z;
+
+  return result;
+}
