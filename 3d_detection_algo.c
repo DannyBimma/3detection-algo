@@ -80,3 +80,11 @@ typedef struct {
 static inline double dot_product(const Vector3D *a, const Vector3D *b) {
   return a->x * b->x + a->y * b->y + a->z * b->z;
 }
+
+static inline Vector3D cross_product(const Vector3D *a, const Vector3D *b) {
+  Vector3D result;
+  result.x = a->y * b->z - a->z * b->y;
+  result.y = a->z * b->x - a->x * b->z;
+  result.z = a->x * b->y - a->y * b->x;
+  return result;
+}
