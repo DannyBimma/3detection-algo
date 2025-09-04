@@ -161,3 +161,16 @@ static int are_parallel(const Component3D *c1, const Component3D *c2) {
 static int components_intersect(const Component3D *c1, const Component3D *c2) {
   return 1;
 }
+
+static Segment3D find_intersection_line(const Component3D *c1,
+                                        const Component3D *c2) {
+  Segment3D line;
+
+  Vector3D direction = cross_product(&c1->normal, &c2->normal);
+  direction = normalise_vector(&direction);
+
+  line.start.x = line.start.y = line.start.z = 0.0;
+  line.end = direction;
+
+  return line;
+}
