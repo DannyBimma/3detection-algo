@@ -144,3 +144,20 @@ static inline Vector3D transform_point(const Matrix4x4 *matrix,
 
   return result;
 }
+
+/* Functions for geometric predicates */
+static int are_coplanar(const Component3D *c1, const Component3D *c2) {
+  double dot = dot_product(&c1->normal, &c2->normal);
+
+  return fabs(fabs(dot) - 1.0) < EPSILON;
+}
+
+static int are_parallel(const Component3D *c1, const Component3D *c2) {
+  double dot = dot_product(&c1->normal, &c2->normal);
+
+  return fabs(fabs(dot) - 1.0) < EPSILON;
+}
+
+static int components_intersect(const Component3D *c1, const Component3D *c2) {
+  return 1;
+}
