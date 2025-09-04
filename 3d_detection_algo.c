@@ -94,3 +94,19 @@ static inline Vector3D cross_product(const Vector3D *a, const Vector3D *b) {
 static inline double vector_magnitude(const Vector3D *v) {
   return sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
 }
+
+static inline Vector3D normalise_vector(const Vector3D *v) {
+  Vector3D result;
+  double mag = vector_magnitude(v);
+
+  if (mag < EPSILON) {
+    result.x = result.y = result.z = 0.0;
+
+    return result;
+  }
+  result.x = v->x / mag;
+  result.y = v->y / mag;
+  result.z = v->z / mag;
+
+  return result;
+}
