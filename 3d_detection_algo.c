@@ -190,3 +190,23 @@ static int is_segment_on_edge(const Segment3D *segment,
                               const Component3D *comp) {
   return 1;
 }
+
+/* Dynamic array allocations */
+static SegmentArray *create_segment_array(int initial_capacity) {
+  SegmentArray *arr = malloc(sizeof(SegmentArray));
+
+  if (!arr)
+    return NULL;
+
+  arr->data = malloc(sizeof(Segment3D) * initial_capacity);
+  if (!arr->data) {
+    free(arr);
+
+    return NULL;
+  }
+
+  arr->count = 0;
+  arr->capacity = initial_capacity;
+
+  return arr;
+}
