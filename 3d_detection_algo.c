@@ -310,3 +310,27 @@ static void destroy_component_array(ComponentArray *arr) {
     free(arr);
   }
 }
+
+static void init_component(Component3D *comp, int id) {
+  comp->id = id;
+  comp->vertices = NULL;
+  comp->vertex_count = 0;
+
+  memset(&comp->transform_3d, 0, sizeof(Matrix4x4));
+  memset(&comp->inverse_transform, 0, sizeof(Matrix4x4));
+
+  comp->normal.x = comp->normal.y = 0.0;
+  comp->normal.z = 1.0;
+
+  comp->fingers.data = malloc(sizeof(Joint) * 10);
+  comp->fingers.count = 0;
+  comp->fingers.capacity = 10;
+
+  comp->holes.data = malloc(sizeof(Joint) * 10);
+  comp->holes.count = 0;
+  comp->holes.capacity = 10;
+
+  comp->slots.data = malloc(sizeof(Joint) * 10);
+  comp->slots.count = 0;
+  comp->slots.capacity = 10;
+}
