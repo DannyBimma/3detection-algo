@@ -277,3 +277,5 @@ static void add_joint(JointArray *arr, JointType type,
   arr->data[arr->count].segment = *segment;
   arr->count++;
 }
+
+/* Manage components */
