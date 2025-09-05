@@ -334,3 +334,10 @@ static void init_component(Component3D *comp, int id) {
   comp->slots.count = 0;
   comp->slots.capacity = 10;
 }
+
+static void cleanup_component(Component3D *comp) {
+  free(comp->vertices);
+  free(comp->fingers.data);
+  free(comp->holes.data);
+  free(comp->slots.data);
+}
