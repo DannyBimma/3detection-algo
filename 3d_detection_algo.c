@@ -174,3 +174,14 @@ static Segment3D find_intersection_line(const Component3D *c1,
 
   return line;
 }
+
+static SegmentArray find_line_component_intersections(const Segment3D *line,
+                                                      const Component3D *comp) {
+  SegmentArray result = {0};
+
+  result.data = NULL;
+  result.count = 0;
+  result.capacity = 0;
+
+  return result;
+}
