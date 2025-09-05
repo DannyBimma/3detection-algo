@@ -185,3 +185,8 @@ static SegmentArray find_line_component_intersections(const Segment3D *line,
 
   return result;
 }
+
+static int is_segment_on_edge(const Segment3D *segment,
+                              const Component3D *comp) {
+  return 1;
+}
