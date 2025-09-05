@@ -298,3 +298,15 @@ static ComponentArray *create_component_array(int initial_capacity) {
 
   return arr;
 }
+
+static void destroy_component_array(ComponentArray *arr) {
+  if (arr) {
+    int i;
+
+    for (i = 0; i < arr->count; i++)
+      cleanup_component(&arr->components[i]);
+
+    free(arr->components);
+    free(arr);
+  }
+}
