@@ -252,3 +252,28 @@ static JointArray *create_joint_array(int initial_capacity) {
 
   return arr;
 }
+
+static void destroy_joint_array(JointArray *arr) {
+  if (arr) {
+    free(arr->data);
+    free(arr);
+  }
+}
+
+static void add_joint(JointArray *arr, JointType type,
+                      const Segment3D *segment) {
+  if (arr->count >= arr->capacity) {
+    int new_capacity = arr->capacity * 2;
+    Joint *new_data = realloc(arr->data, sizeof(Joint) * new_capacity);
+
+    if (!new_data)
+      return;
+
+    arr->data = new_data;
+    arr->capacity = new_capacity;
+  }
+
+  arr->data[arr->count].type = type;
+  arr->data[arr->count].segment = *segment;
+  arr->count++;
+}
