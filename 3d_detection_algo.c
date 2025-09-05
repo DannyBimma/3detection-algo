@@ -279,3 +279,22 @@ static void add_joint(JointArray *arr, JointType type,
 }
 
 /* Manage components */
+static ComponentArray *create_component_array(int initial_capacity) {
+  ComponentArray *arr = malloc(sizeof(ComponentArray));
+
+  if (!arr)
+    return NULL;
+
+  arr->components = malloc(sizeof(Component3D) * initial_capacity);
+
+  if (!arr->components) {
+    free(arr);
+
+    return NULL;
+  }
+
+  arr->count = 0;
+  arr->capacity = initial_capacity;
+
+  return arr;
+}
