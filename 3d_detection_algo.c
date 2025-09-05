@@ -232,3 +232,23 @@ static void add_segment(SegmentArray *arr, const Segment3D *segment) {
 
   arr->data[arr->count++] = *segment;
 }
+
+static JointArray *create_joint_array(int initial_capacity) {
+  JointArray *arr = malloc(sizeof(JointArray));
+
+  if (!arr)
+    return NULL;
+
+  arr->data = malloc(sizeof(Joint) * initial_capacity);
+
+  if (!arr->data) {
+    free(arr);
+
+    return NULL;
+  }
+
+  arr->count = 0;
+  arr->capacity = initial_capacity;
+
+  return arr;
+}
