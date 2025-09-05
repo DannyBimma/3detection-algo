@@ -210,3 +210,10 @@ static SegmentArray *create_segment_array(int initial_capacity) {
 
   return arr;
 }
+
+static void destroy_segment_array(SegmentArray *arr) {
+  if (arr) {
+    free(arr->data);
+    free(arr);
+  }
+}
