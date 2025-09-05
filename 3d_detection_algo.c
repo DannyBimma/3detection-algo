@@ -217,3 +217,18 @@ static void destroy_segment_array(SegmentArray *arr) {
     free(arr);
   }
 }
+
+static void add_segment(SegmentArray *arr, const Segment3D *segment) {
+  if (arr->count >= arr->capacity) {
+    int new_capacity = arr->capacity * 2;
+    Segment3D *new_data = realloc(arr->data, sizeof(Segment3D) * new_capacity);
+
+    if (!new_data)
+      return;
+
+    arr->data = new_data;
+    arr->capacity = new_capacity;
+  }
+
+  arr->data[arr->count++] = *segment;
+}
