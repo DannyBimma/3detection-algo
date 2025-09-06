@@ -113,6 +113,27 @@ static void cleanup_component(Component3D *comp);
 static void merge_coplanar_components(Component3D *c1, Component3D *c2);
 static void find_and_classify_intersections(ComponentArray *components);
 
+int main(void) {
+  ComponentArray *components = create_component_array(10);
+  if (!components) {
+    fprintf(stderr, "ERROR: Creation of component array utterly failed\n");
+
+    return 1;
+  }
+
+  printf("Academic 3D-Component Intersection Detection Algorithm\n");
+  printf("An Expanded ANSI-C Implementation\n");
+
+  if (detect_component_intersections(components) == 0)
+    printf("PASSED: Algorithm executed successfully\n");
+  else
+    printf("FAILED: No Dice 😔\n");
+
+  destroy_component_array(components);
+
+  return 0;
+}
+
 /* Vector operations */
 static inline double dot_product(const Vector3D *a, const Vector3D *b) {
   return a->x * b->x + a->y * b->y + a->z * b->z;
