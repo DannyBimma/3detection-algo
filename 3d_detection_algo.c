@@ -341,3 +341,9 @@ static void cleanup_component(Component3D *comp) {
   free(comp->holes.data);
   free(comp->slots.data);
 }
+
+/* Core algorithm functions */
+static void merge_coplanar_components(Component3D *c1, Component3D *c2) {
+  if (!are_coplanar(c1, c2) || !components_intersect(c1, c2))
+    return;
+}
