@@ -347,3 +347,56 @@ static void merge_coplanar_components(Component3D *c1, Component3D *c2) {
   if (!are_coplanar(c1, c2) || !components_intersect(c1, c2))
     return;
 }
+
+static void find_and_classify_intersections(ComponentArray *components) {
+  int i, j, k;
+
+  for (i = 0; i < components->count; i++) {
+    Component3D *ci = &components->components[i];
+
+    for (j = i + 1; j < components->count; j++) {
+      Component3D *cj = &components->components[j];
+
+      if (are_coplanar(ci, cj) && components_intersect(ci, cj)) {
+        merge_coplanar_components(ci, cj);
+      } else if (!are_coplanar(ci, cj) && !are_parallel(ci, cj)) {
+        Segment3D intersection_line = find_intersection_line(ci, cj);
+
+        SegmentArray segments_i =
+            find_line_component_intersections(&intersection_line, ci);
+        SegmentArray segments_j =
+            find_line_component_intersections(&intersection_line, cj);
+
+        for (k = 0; k < segments_i.count && k < segments_j.count; k++) {
+          Segment3D seg_i = segments_i.data[k];
+          Segment3D seg_j = segments_j.data[k];
+
+          seg_i.start = transform_point(&ci->inverse_transform, &seg_i.start);
+          seg_i.end = transform_point(&ci->inverse_transform, &seg_i.end);
+          seg_j.start = transform_point(&cj->inverse_transform, &seg_j.start);
+          seg_j.end = transform_point(&cj->inverse_transform, &seg_j.end);
+
+          int i_on_edge = is_segment_on_edge(&seg_i, ci);
+          int j_on_edge = is_segment_on_edge(&seg_j, cj);
+
+          if (i_on_edge && j_on_edge) {
+            add_joint(&ci->fingers, FINGER_JOINT, &seg_i);
+            add_joint(&cj->fingers, FINGER_JOINT, &seg_j);
+          } else if (i_on_edge && !j_on_edge) {
+            add_joint(&ci->fingers, FINGER_JOINT, &seg_i);
+            add_joint(&cj->holes, HOLE_JOINT, &seg_j);
+          } else if (!i_on_edge && j_on_edge) {
+            add_joint(&ci->holes, HOLE_JOINT, &seg_i);
+            add_joint(&cj->fingers, FINGER_JOINT, &seg_j);
+          } else {
+            add_joint(&ci->slots, SLOT_JOINT, &seg_i);
+            add_joint(&cj->slots, SLOT_JOINT, &seg_j);
+          }
+        }
+
+        free(segments_i.data);
+        free(segments_j.data);
+      }
+    }
+  }
+}
