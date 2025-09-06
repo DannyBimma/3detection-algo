@@ -400,3 +400,13 @@ static void find_and_classify_intersections(ComponentArray *components) {
     }
   }
 }
+
+// Algo starting point
+int detect_component_intersections(ComponentArray *components) {
+  if (!components || components->count == 0)
+    return -1;
+
+  find_and_classify_intersections(components);
+
+  return 0;
+}
