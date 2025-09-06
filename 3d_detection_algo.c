@@ -112,6 +112,7 @@ static void cleanup_component(Component3D *comp);
 
 static void merge_coplanar_components(Component3D *c1, Component3D *c2);
 static void find_and_classify_intersections(ComponentArray *components);
+int detect_component_intersections(ComponentArray *components);
 
 int main(void) {
   ComponentArray *components = create_component_array(10);
