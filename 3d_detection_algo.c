@@ -76,7 +76,44 @@ typedef struct {
   int capacity;
 } ComponentArray;
 
-/* Vector operation function definitions */
+/* Function prototypes */
+static inline double dot_product(const Vector3D *a, const Vector3D *b);
+static inline Vector3D cross_product(const Vector3D *a, const Vector3D *b);
+static inline double vector_magnitude(const Vector3D *v);
+static inline Vector3D normalise_vector(const Vector3D *v);
+static inline Vector3D subtract_vectors(const Vector3D *a, const Vector3D *b);
+static inline Vector3D add_vectors(const Vector3D *a, const Vector3D *b);
+static inline Vector3D transform_point(const Matrix4x4 *matrix,
+                                       const Vector3D *point);
+
+static int are_coplanar(const Component3D *c1, const Component3D *c2);
+static int are_parallel(const Component3D *c1, const Component3D *c2);
+static int components_intersect(const Component3D *c1, const Component3D *c2);
+static Segment3D find_intersection_line(const Component3D *c1,
+                                        const Component3D *c2);
+static SegmentArray find_line_component_intersections(const Segment3D *line,
+                                                      const Component3D *comp);
+static int is_segment_on_edge(const Segment3D *segment,
+                              const Component3D *comp);
+
+static SegmentArray *create_segment_array(int initial_capacity);
+static void destroy_segment_array(SegmentArray *arr);
+static void add_segment(SegmentArray *arr, const Segment3D *segment);
+
+static JointArray *create_joint_array(int initial_capacity);
+static void destroy_joint_array(JointArray *arr);
+static void add_joint(JointArray *arr, JointType type,
+                      const Segment3D *segment);
+
+static ComponentArray *create_component_array(int initial_capacity);
+static void destroy_component_array(ComponentArray *arr);
+static void init_component(Component3D *comp, int id);
+static void cleanup_component(Component3D *comp);
+
+static void merge_coplanar_components(Component3D *c1, Component3D *c2);
+static void find_and_classify_intersections(ComponentArray *components);
+
+/* Vector operations */
 static inline double dot_product(const Vector3D *a, const Vector3D *b) {
   return a->x * b->x + a->y * b->y + a->z * b->z;
 }
