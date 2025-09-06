@@ -122,6 +122,20 @@ int main(void) {
     return 1;
   }
 
+  // Add test components
+  components->components = realloc(components->components, sizeof(Component3D) * 2);
+  components->count = 2;
+  
+  init_component(&components->components[0], 1);
+  components->components[0].normal.x = 0.0;
+  components->components[0].normal.y = 0.0; 
+  components->components[0].normal.z = 1.0;
+  
+  init_component(&components->components[1], 2);
+  components->components[1].normal.x = 1.0;
+  components->components[1].normal.y = 0.0;
+  components->components[1].normal.z = 0.0;
+
   printf("Academic 3D-Component Intersection Detection Algorithm\n");
   printf("An Expanded ANSI-C Implementation\n");
 
