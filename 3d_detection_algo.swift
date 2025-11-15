@@ -68,27 +68,36 @@ struct Vector3D {
 // MARK: - Matrix4x4
 
 /// Represents a 4x4 homogeneous transformation matrix
+/// Optimised with flat array storage for better cache locality
 struct Matrix4x4 {
-    var m: [[Double]]
+    // Flat array in row-major order
+    var m: [Double]
 
-    /// Creates an identity matrix
+    /// Create an identity matrix
     static let identity: Matrix4x4 = {
-        var matrix = Matrix4x4(m: Array(repeating: Array(repeating: 0.0, count: 4), count: 4))
-        for i in 0..<4 {
-            matrix.m[i][i] = 1.0
-        }
-        return matrix
+        var elements = Array(repeating: 0.0, count: 16)
+        elements[0] = 1.0  // m[0][0]
+        elements[5] = 1.0  // m[1][1]
+        elements[10] = 1.0  // m[2][2]
+        elements[15] = 1.0  // m[3][3]
+        return Matrix4x4(m: elements)
     }()
 
-    /// Creates a zero matrix
-    static let zero = Matrix4x4(m: Array(repeating: Array(repeating: 0.0, count: 4), count: 4))
+    /// Create a zero matrix
+    static let zero = Matrix4x4(m: Array(repeating: 0.0, count: 16))
 
-    /// Transforms a 3D point using this matrix
+    /// Access element at row i, column j
+    subscript(i: Int, j: Int) -> Double {
+        get { return m[i * 4 + j] }
+        set { m[i * 4 + j] = newValue }
+    }
+
+    /// Transform a 3D point using this matrix
     func transform(_ point: Vector3D) -> Vector3D {
         return Vector3D(
-            x: m[0][0] * point.x + m[0][1] * point.y + m[0][2] * point.z + m[0][3],
-            y: m[1][0] * point.x + m[1][1] * point.y + m[1][2] * point.z + m[1][3],
-            z: m[2][0] * point.x + m[2][1] * point.y + m[2][2] * point.z + m[2][3]
+            x: m[0] * point.x + m[1] * point.y + m[2] * point.z + m[3],
+            y: m[4] * point.x + m[5] * point.y + m[6] * point.z + m[7],
+            z: m[8] * point.x + m[9] * point.y + m[10] * point.z + m[11]
         )
     }
 }

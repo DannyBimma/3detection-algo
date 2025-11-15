@@ -252,10 +252,14 @@ class GeometryUtils {
 
 /**
  * Main algorithm implementation
+ * Optimized with reusable temporary vectors to reduce allocations
  */
 class IntersectionDetector {
   constructor() {
     this.components = [];
+    // Pre-allocate temporary vectors for reuse to reduce GC pressure
+    this._tempVec1 = new Vector3D();
+    this._tempVec2 = new Vector3D();
   }
 
   /**

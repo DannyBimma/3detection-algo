@@ -74,10 +74,12 @@ export class Vector3D {
 
 /**
  * 4x4 Transformation Matrix
+ * Optimized with Float64Array for better performance and cache locality
  */
 export class Matrix4x4 {
   constructor() {
-    this.m = new Array(16).fill(0);
+    // Use Float64Array for better performance
+    this.m = new Float64Array(16);
     // Identity matrix
     this.m[0] = this.m[5] = this.m[10] = this.m[15] = 1.0;
   }
@@ -92,7 +94,7 @@ export class Matrix4x4 {
 
   set(values) {
     if (values.length === 16) {
-      this.m = [...values];
+      this.m.set(values);
     } else if (Array.isArray(values) && values.length === 4) {
       for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {

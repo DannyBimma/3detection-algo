@@ -336,23 +336,33 @@ pub fn main() !void {
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
-    // Create test components
+    // Create test components using ArrayList to avoid copying
+    var component_list = ArrayList(Component3D).init(allocator);
+    defer {
+        // Clean up components
+        for (component_list.items) |*comp| {
+            comp.deinit();
+        }
+        component_list.deinit();
+    }
+
+    // Create and add component 1
     var component1 = try Component3D.init(allocator, 1);
-    defer component1.deinit();
     component1.normal = Vector3D{ .x = 0.0, .y = 0.0, .z = 1.0 };
+    try component_list.append(component1);
 
+    // Create and add component 2
     var component2 = try Component3D.init(allocator, 2);
-    defer component2.deinit();
     component2.normal = Vector3D{ .x = 1.0, .y = 0.0, .z = 0.0 };
-
-    var components = [_]Component3D{ component1, component2 };
+    try component_list.append(component2);
 
     const stdout = std.io.getStdOut().writer();
 
     try stdout.print("Academic 3D-Component Intersection Detection Algorithm\n", .{});
     try stdout.print("Zig Implementation\n\n", .{});
 
-    const result = try detect_component_intersections(allocator, &components);
+    // Pass the slice directly
+    const result = try detect_component_intersections(allocator, component_list.items);
 
     if (result) {
         try stdout.print("PASSED: Algorithm executed successfully\n", .{});
