@@ -4,6 +4,9 @@ Multi-language implementations of the 3D Component Intersection Detection and Jo
 
 **Available Implementations:**
 - **[ANSI-C](#c-implementation)** - High-performance native implementation
+- **[Lua](#lua-implementation)** - Lightweight scripting language for embedded systems
+- **[Swift](#swift-implementation)** - Modern Apple ecosystem integration
+- **[Zig](#zig-implementation)** - Memory-safe systems programming
 - **[Node.js](#nodejs-implementation)** - Server-side JavaScript for backend services
 - **[Browser](#browser-implementation)** - Client-side JavaScript with interactive visualization
 
@@ -16,6 +19,9 @@ Choose the implementation that best fits your needs:
 | I want to... | Use this implementation |
 |--------------|-------------------------|
 | Process large datasets quickly | [C Implementation](#c-implementation) |
+| Build for Apple platforms (iOS/macOS) | [Swift Implementation](#swift-implementation) |
+| Embed in games or plugins | [Lua Implementation](#lua-implementation) |
+| Maximum safety with performance | [Zig Implementation](#zig-implementation) |
 | Integrate into a Node.js backend | [Node.js Implementation](#nodejs-implementation) |
 | Create an interactive web demo | [Browser Implementation](#browser-implementation) |
 | Learn how the algorithm works | [Interactive Demo](#interactive-visualization-demo) |
@@ -209,6 +215,314 @@ int main() {
     destroy_component_array(components);
     return 0;
 }
+```
+
+---
+
+### Lua Implementation
+
+**File:** `3d_detection_algo.lua`
+
+The Lua implementation provides a lightweight, embeddable solution perfect for game engines and scripting environments.
+
+#### Features
+- Pure Lua with no external dependencies
+- Idiomatic Lua with metatables and operator overloading
+- Tables for dynamic data structures
+- Lightweight and easy to embed
+- Compatible with Lua 5.4+
+
+#### Pros
+- ✅ **Extremely lightweight** - Minimal memory footprint
+- ✅ **Easy to embed** - Perfect for plugins and game engines
+- ✅ **Simple syntax** - Very readable and maintainable
+- ✅ **Cross-platform** - Runs anywhere Lua runs
+- ✅ **No compilation** - Interpreted, instant execution
+- ✅ **Dynamic typing** - Flexible and rapid prototyping
+
+#### Cons
+- ❌ **Slower than compiled languages** - Interpreted execution overhead
+- ❌ **Limited type safety** - Runtime errors for type mismatches
+- ❌ **Smaller ecosystem** - Fewer libraries than mainstream languages
+- ❌ **No built-in threading** - Single-threaded (though coroutines available)
+
+#### When to Use
+- Game engine scripting (Unity, Roblox, Garry's Mod, etc.)
+- Embedded in C/C++ applications as a scripting layer
+- Configuration and plugin systems
+- Rapid prototyping and testing
+- Educational purposes (simple, clear syntax)
+- IoT and embedded devices with LuaJIT
+
+#### Installation & Running
+
+**Prerequisites:**
+- Lua 5.4 or later (or LuaJIT for better performance)
+
+**Install Lua (if needed):**
+```bash
+# Ubuntu/Debian
+sudo apt-get install lua5.4
+
+# macOS (Homebrew)
+brew install lua
+
+# Windows (download from lua.org)
+```
+
+**Run:**
+```bash
+lua 3d_detection_algo.lua
+```
+
+**Integration Example:**
+```lua
+-- Load the algorithm module (if packaged as a module)
+local Vector3D = require("vector3d")
+local Component3D = require("component3d")
+
+-- Create detector (simplified example)
+local component1 = Component3D.new(1)
+component1.normal = Vector3D.new(0.0, 0.0, 1.0)
+
+local component2 = Component3D.new(2)
+component2.normal = Vector3D.new(1.0, 0.0, 0.0)
+
+local components = {component1, component2}
+
+-- Run detection
+local result = detect_component_intersections(components)
+
+-- Access results
+print("Component 1 finger joints:", #component1.fingers)
+print("Component 1 hole joints:", #component1.holes)
+print("Component 1 slot joints:", #component1.slots)
+```
+
+**Expected Output:**
+```
+Academic 3D-Component Intersection Detection Algorithm
+Lua Implementation
+
+PASSED: Algorithm executed successfully
+```
+
+---
+
+### Swift Implementation
+
+**File:** `3d_detection_algo.swift`
+
+The Swift implementation brings type safety and modern language features to the Apple ecosystem.
+
+#### Features
+- Modern Swift with value types (structs)
+- Protocol-oriented design
+- Strong type safety with compile-time checks
+- Automatic Reference Counting (ARC) for memory management
+- Operator overloading for vector math
+- Native Apple platform integration
+
+#### Pros
+- ✅ **Type safety** - Compile-time error prevention
+- ✅ **Modern syntax** - Clean, expressive code
+- ✅ **Great performance** - Optimized compiler, near C speeds
+- ✅ **Memory safe** - ARC prevents leaks and dangling pointers
+- ✅ **Apple ecosystem** - Perfect for iOS, macOS, tvOS, watchOS
+- ✅ **Interactive playground** - Great for learning and testing
+
+#### Cons
+- ❌ **Apple platforms primarily** - Limited Linux support, no Windows
+- ❌ **Larger binaries** - Swift runtime adds overhead
+- ❌ **Compilation required** - No scripting/interpreted mode
+- ❌ **Steep learning curve** - Complex type system and ownership
+
+#### When to Use
+- iOS and macOS CAD/CAM applications
+- Apple platform exclusive tools
+- When type safety is critical
+- SwiftUI-based visualization apps
+- Cross-platform Apple ecosystem projects
+- ARKit integration for 3D visualization
+
+#### Installation & Running
+
+**Prerequisites:**
+- Swift 5.5 or later (comes with Xcode on macOS)
+- macOS, Linux, or Windows (experimental)
+
+**Install Swift:**
+```bash
+# macOS (comes with Xcode)
+xcode-select --install
+
+# Linux (Ubuntu)
+wget https://swift.org/builds/swift-5.x-release/ubuntu2004/swift-5.x-RELEASE/swift-5.x-RELEASE-ubuntu20.04.tar.gz
+# Extract and add to PATH
+
+# Or use Swift toolchain from swift.org
+```
+
+**Run:**
+```bash
+swift 3d_detection_algo.swift
+```
+
+**Compile for production:**
+```bash
+swiftc -O 3d_detection_algo.swift -o 3d_detection_algo
+./3d_detection_algo
+```
+
+**Integration Example:**
+```swift
+import Foundation
+
+// Create components
+var component1 = Component3D(id: 1)
+component1.normal = Vector3D(x: 0, y: 0, z: 1)
+
+var component2 = Component3D(id: 2)
+component2.normal = Vector3D(x: 1, y: 0, z: 0)
+
+var component3 = Component3D(id: 3)
+component3.normal = Vector3D(x: 0, y: 1, z: 0)
+
+let components = [component1, component2, component3]
+
+// Run detection
+if detectComponentIntersections(in: components) {
+    // Access results
+    print("Component 1:")
+    print("  Finger joints: \(component1.fingers.count)")
+    print("  Hole joints: \(component1.holes.count)")
+    print("  Slot joints: \(component1.slots.count)")
+}
+```
+
+**Expected Output:**
+```
+Academic 3D-Component Intersection Detection Algorithm
+Swift Implementation
+
+PASSED: Algorithm executed successfully
+```
+
+---
+
+### Zig Implementation
+
+**File:** `3d_detection_algo.zig`
+
+The Zig implementation combines C-like performance with modern safety features and explicit control.
+
+#### Features
+- Explicit memory management with allocators
+- Compile-time execution and generics
+- No hidden control flow
+- C interoperability without FFI
+- Error handling as values
+- Cross-compilation to any platform
+
+#### Pros
+- ✅ **Memory safety** - No undefined behavior without `unsafe`
+- ✅ **C-level performance** - Zero overhead abstractions
+- ✅ **Explicit control** - No hidden allocations or exceptions
+- ✅ **Great tooling** - Built-in build system and package manager
+- ✅ **Cross-compile** - Build for any target from any host
+- ✅ **C interop** - Seamlessly use C libraries
+
+#### Cons
+- ❌ **Immature ecosystem** - Fewer libraries than established languages
+- ❌ **Learning curve** - Explicit memory management
+- ❌ **Still evolving** - Language not yet 1.0 (breaking changes possible)
+- ❌ **Compilation required** - No REPL or scripting mode
+
+#### When to Use
+- Systems programming with safety guarantees
+- Cross-platform development (embedded, desktop, server)
+- When you need C performance without C pitfalls
+- Replacing C/C++ in existing codebases
+- Building reliable, maintainable low-level software
+- Performance-critical applications with safety requirements
+
+#### Installation & Running
+
+**Prerequisites:**
+- Zig 0.11.0 or later
+
+**Install Zig:**
+```bash
+# macOS (Homebrew)
+brew install zig
+
+# Linux (download from ziglang.org)
+wget https://ziglang.org/download/0.11.0/zig-linux-x86_64-0.11.0.tar.xz
+tar xf zig-linux-x86_64-0.11.0.tar.xz
+# Add to PATH
+
+# Windows (download from ziglang.org)
+# Or use package managers like chocolatey
+```
+
+**Run:**
+```bash
+zig run 3d_detection_algo.zig
+```
+
+**Build optimized binary:**
+```bash
+zig build-exe 3d_detection_algo.zig -O ReleaseFast
+./3d_detection_algo
+```
+
+**Cross-compile example:**
+```bash
+# Build for Windows from Linux
+zig build-exe 3d_detection_algo.zig -target x86_64-windows -O ReleaseFast
+
+# Build for ARM Linux from macOS
+zig build-exe 3d_detection_algo.zig -target aarch64-linux -O ReleaseFast
+```
+
+**Integration Example:**
+```zig
+const std = @import("std");
+
+pub fn main() !void {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa.deinit();
+    const allocator = gpa.allocator();
+
+    // Create components
+    var component1 = try Component3D.init(allocator, 1);
+    defer component1.deinit();
+    component1.normal = Vector3D{ .x = 0.0, .y = 0.0, .z = 1.0 };
+
+    var component2 = try Component3D.init(allocator, 2);
+    defer component2.deinit();
+    component2.normal = Vector3D{ .x = 1.0, .y = 0.0, .z = 0.0 };
+
+    var components = [_]Component3D{ component1, component2 };
+
+    // Run detection
+    const result = try detect_component_intersections(allocator, &components);
+
+    if (result) {
+        const stdout = std.io.getStdOut().writer();
+        try stdout.print("Component 1 finger joints: {}\n", .{component1.fingers.items.len});
+        try stdout.print("Component 1 hole joints: {}\n", .{component1.holes.items.len});
+        try stdout.print("Component 1 slot joints: {}\n", .{component1.slots.items.len});
+    }
+}
+```
+
+**Expected Output:**
+```
+Academic 3D-Component Intersection Detection Algorithm
+Zig Implementation
+
+PASSED: Algorithm executed successfully
 ```
 
 ---
@@ -544,23 +858,28 @@ The demo provides:
 
 ### Feature Matrix
 
-| Feature | C | Node.js | Browser |
-|---------|:---:|:-------:|:-------:|
-| **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **Memory Efficiency** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Ease of Use** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Development Speed** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Visualization** | ❌ | ❌ | ✅ |
-| **Event System** | ❌ | ❌ | ✅ |
-| **Animation Support** | ❌ | ❌ | ✅ |
-| **Module System** | Manual | CommonJS/ESM | ES6 Modules |
-| **Compilation Required** | ✅ | ❌ | ❌ |
-| **Runtime Dependencies** | None | Node.js 14+ | Modern Browser |
-| **Platform Support** | All | Cross-platform | Browser only |
-| **Ideal Dataset Size** | 10,000+ | 100-1,000 | 10-100 |
-| **Memory Usage** | Very Low | Low | Moderate |
-| **Startup Time** | Instant | Fast | Fast |
-| **Multi-threading** | Possible* | Possible* | Limited** |
+| Feature | C | Lua | Swift | Zig | Node.js | Browser |
+|---------|:---:|:---:|:-----:|:---:|:-------:|:-------:|
+| **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| **Memory Efficiency** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| **Ease of Use** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Development Speed** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Type Safety** | ⭐⭐ | ⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
+| **Memory Safety** | ⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| **Visualization** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Event System** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Animation Support** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Module System** | Manual | require() | import | @import | CommonJS/ESM | ES6 Modules |
+| **Compilation** | Required | No | Required | Required | No | No |
+| **Dependencies** | None | None | Swift RT | None | Node.js 14+ | Browser |
+| **Platform Support** | All | All | Apple+Linux | All | Cross-platform | Browser only |
+| **Ideal Dataset** | 10,000+ | 100-1,000 | 5,000+ | 10,000+ | 100-1,000 | 10-100 |
+| **Memory Usage** | Very Low | Very Low | Low | Very Low | Low | Moderate |
+| **Startup Time** | Instant | Instant | Fast | Instant | Fast | Fast |
+| **Multi-threading** | Possible* | Limited | Possible | Possible* | Possible* | Limited** |
+| **Cross-compile** | ❌ | N/A | Limited | ✅✅✅ | N/A | N/A |
+| **Ecosystem Size** | Huge | Medium | Large | Small | Huge | Huge |
+| **Learning Curve** | High | Low | Medium | High | Low | Low |
 
 \* Requires additional implementation
 \** Web Workers available but not implemented
@@ -569,11 +888,18 @@ The demo provides:
 
 Processing 100 components with 500 intersection checks:
 
-| Implementation | Execution Time | Memory Usage |
-|----------------|---------------:|-------------:|
-| C (gcc -O3) | ~5ms | ~100KB |
-| Node.js | ~15ms | ~500KB |
-| Browser | ~25ms | ~800KB |
+| Implementation | Execution Time | Memory Usage | Binary Size |
+|----------------|---------------:|-------------:|------------:|
+| C (gcc -O3) | ~5ms | ~100KB | ~35KB |
+| Lua | ~40ms | ~150KB | ~280KB† |
+| Swift (-O) | ~6ms | ~200KB | ~1.2MB |
+| Zig (ReleaseFast) | ~5ms | ~100KB | ~40KB |
+| Node.js | ~15ms | ~500KB | ~12MB‡ |
+| Browser | ~25ms | ~800KB | ~15KB* |
+
+*JavaScript source only, browser runtime not counted
+†Lua interpreter + script
+‡Node.js runtime + dependencies
 
 *Benchmarks are illustrative. Actual performance varies by hardware and dataset complexity.*
 
@@ -581,16 +907,22 @@ Processing 100 components with 500 intersection checks:
 
 | Scenario | Recommended Implementation | Reason |
 |----------|---------------------------|---------|
-| Production manufacturing system | **C** | Maximum performance and reliability |
+| Production manufacturing system | **C** or **Zig** | Maximum performance, reliability, and safety |
+| iOS/macOS CAD application | **Swift** | Native Apple platform integration |
+| Game engine plugin | **Lua** | Lightweight, easily embeddable scripting |
+| Cross-platform CLI tool | **Zig** | Single binary, cross-compilation support |
 | REST API backend | **Node.js** | Easy integration with modern web stack |
-| Educational demo | **Browser** | Interactive visualization aids learning |
-| Embedded system | **C** | Minimal footprint and no runtime |
+| Educational demo | **Browser** or **Lua** | Interactive visualization / simple syntax |
+| Embedded system | **C** or **Zig** | Minimal footprint, no runtime |
 | CAD web application | **Browser** | In-browser processing, no server needed |
-| Batch processing pipeline | **C** | Handles large datasets efficiently |
-| Prototype/MVP development | **Node.js** | Fast development iteration |
+| Batch processing pipeline | **C** or **Zig** | Handles large datasets efficiently |
+| Prototype/MVP development | **Node.js** or **Lua** | Fast development iteration |
 | Mobile web app | **Browser** | Works on any device with a browser |
 | Real-time collaboration tool | **Browser** | Event system enables live updates |
 | Data analysis workflow | **Node.js** | Easy integration with npm ecosystem |
+| Unity/Unreal plugin | **Lua** | Standard scripting language for games |
+| Safety-critical system | **Swift** or **Zig** | Memory safety guarantees |
+| ARKit/RealityKit integration | **Swift** | Apple's 3D frameworks |
 
 ---
 
@@ -600,29 +932,36 @@ Processing 100 components with 500 intersection checks:
 
 **C Implementation:**
 ```bash
-# Compile
-gcc -o 3d_detection_algo 3d_detection_algo.c -lm -O3
+gcc -o 3d_detection_algo 3d_detection_algo.c -lm -O3 && ./3d_detection_algo
+```
 
-# Run
-./3d_detection_algo
+**Lua Implementation:**
+```bash
+lua 3d_detection_algo.lua
+```
+
+**Swift Implementation:**
+```bash
+swift 3d_detection_algo.swift  # Interpreted
+# OR
+swiftc -O 3d_detection_algo.swift && ./3d_detection_algo  # Compiled
+```
+
+**Zig Implementation:**
+```bash
+zig run 3d_detection_algo.zig  # Run directly
+# OR
+zig build-exe 3d_detection_algo.zig -O ReleaseFast && ./3d_detection_algo  # Build
 ```
 
 **Node.js Implementation:**
 ```bash
-# Run directly
 node 3d_detection_algo_node.js
-
-# Or use in your code
-const { IntersectionDetector, Component3D } = require('./3d_detection_algo_node.js');
 ```
 
 **Browser Implementation:**
 ```bash
-# Start a server (choose one)
-python3 -m http.server 8000    # Python
-npx serve                       # Node.js
-
-# Open browser
+python3 -m http.server 8000  # Start server
 # Navigate to http://localhost:8000/demo.html
 ```
 
@@ -631,18 +970,22 @@ npx serve                       # Node.js
 ```
 3detection-algo/
 ├── 3d_detection_algo.c           # C implementation
+├── 3d_detection_algo.lua         # Lua implementation
+├── 3d_detection_algo.swift       # Swift implementation
+├── 3d_detection_algo.zig         # Zig implementation
 ├── 3d_detection_algo_node.js     # Node.js implementation
 ├── 3d_detection_algo_browser.js  # Browser implementation
 ├── demo.html                      # Interactive demo page
 ├── demo.css                       # Demo stylesheet
 ├── demo.js                        # Demo visualization logic
 ├── 3d_algo_img.JPG               # Original algorithm pseudocode
+├── LICENSE                        # License file
 └── README.md                      # This file
 ```
 
 ### Common API Across Implementations
 
-All three implementations share a similar API structure:
+All implementations share a similar API structure (with language-specific syntax):
 
 ```javascript
 // Create detector
