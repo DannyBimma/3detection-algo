@@ -1,6 +1,11 @@
 # 3D Component Intersection Detection Algorithm
 
-A high-performance ANSI-C implementation of the 3D Component Intersection Detection and Joint Classification Algorithm, converted from academic pseudocode for real-world CAD/CAM applications.
+Multi-language implementations of the 3D Component Intersection Detection and Joint Classification Algorithm, converted from academic pseudocode for real-world CAD/CAM applications.
+
+**Available Implementations:**
+- ANSI-C (high-performance)
+- Node.js (server-side JavaScript)
+- Browser (client-side JavaScript with interactive visualization)
 
 ![Original Algorithm](3d_algo_img.JPG)
 
@@ -115,7 +120,118 @@ The pseudocode assumed infinite memory, which my machine does not have; so my C 
 - **Multi-Part Printing**: Optimises part orientation and assembly sequences
 - **Interlocking Designs**: Creates puzzle-like assemblies for complex geometries
 
-## Usage
+## JavaScript Implementations
+
+### Node.js Implementation
+
+The Node.js implementation (`3d_detection_algo_node.js`) is optimized for server-side processing with:
+
+- **ES6+ Features**: Modern JavaScript syntax and patterns
+- **Efficient Memory Management**: Float64Arrays for matrix operations
+- **Module Support**: Both CommonJS and ESM export formats
+- **Performance Optimizations**: Optimized for V8 engine
+
+#### Node.js Usage
+
+```javascript
+const { IntersectionDetector, Component3D } = require('./3d_detection_algo_node.js');
+
+// Create detector
+const detector = new IntersectionDetector();
+
+// Create components
+const component1 = new Component3D(1);
+component1.setNormal(0, 0, 1);  // XY plane
+
+const component2 = new Component3D(2);
+component2.setNormal(1, 0, 0);  // YZ plane
+
+// Add components
+detector.addComponent(component1);
+detector.addComponent(component2);
+
+// Run detection
+detector.detectIntersections();
+
+// Get results
+const results = detector.getResults();
+console.log(results);
+```
+
+#### Running the Node.js Example
+
+```bash
+node 3d_detection_algo_node.js
+```
+
+### Browser Implementation
+
+The browser implementation (`3d_detection_algo_browser.js`) provides:
+
+- **ES6 Modules**: Native browser module support
+- **Event-Driven Architecture**: Real-time callbacks for visualization
+- **Animation Support**: Step-by-step algorithm execution with configurable delays
+- **Lightweight Footprint**: Optimized for client-side performance
+
+#### Browser Usage
+
+```html
+<script type="module">
+  import { createDemoScene } from './3d_detection_algo_browser.js';
+
+  const detector = createDemoScene();
+
+  // Listen to algorithm events
+  detector.on('algorithm:start', (data) => {
+    console.log('Starting detection...');
+  });
+
+  detector.on('joint:classified', (data) => {
+    console.log('Joint found:', data);
+  });
+
+  detector.on('algorithm:complete', (data) => {
+    console.log('Results:', data.components);
+  });
+
+  // Run detection with animation
+  await detector.detectIntersections();
+</script>
+```
+
+### Interactive Visualization Demo
+
+An interactive web-based visualization is available in `demo.html`:
+
+- **Real-time Algorithm Visualization**: Watch the algorithm process components step-by-step
+- **Canvas Rendering**: 3D components rendered with normal vectors and intersection lines
+- **Interactive Controls**: Adjust animation speed, toggle visual elements
+- **Live Results Display**: See joint classifications as they're discovered
+- **Algorithm Log**: Real-time event logging with timestamps
+
+#### Running the Demo
+
+Simply open `demo.html` in a modern web browser:
+
+```bash
+# Using Python's built-in server
+python3 -m http.server 8000
+
+# Or using Node.js
+npx serve
+
+# Then navigate to http://localhost:8000/demo.html
+```
+
+The demo includes:
+- Adjustable animation speed (100ms - 2000ms)
+- Toggle normal vector visualization
+- Toggle grid display
+- Auto-rotate mode
+- Component-by-component results breakdown
+- Color-coded joint types (Finger: green, Hole: orange, Slot: red)
+
+## C Implementation Usage
 
 ### Compilation
 
@@ -146,10 +262,25 @@ destroy_component_array(components);
 - **Space Complexity**: O(n + m) where m is the total number of intersection segments
 - **Numerical Stability**: IEEE 754 double precision with configurable epsilon tolerance
 
+## Implementation Comparison
+
+| Feature | C | Node.js | Browser |
+|---------|---|---------|---------|
+| Performance | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Memory Efficiency | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| Ease of Use | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Visualization | ❌ | ❌ | ✅ |
+| Event System | ❌ | ❌ | ✅ |
+| Module System | Manual | CommonJS/ESM | ES6 Modules |
+| Best For | High-performance batch processing | Server-side services | Interactive applications |
+
 ## Future Enhancements
 
-- GPU acceleration for large component sets
+- ✅ ~~Real-time visualisation integration~~ (completed - see demo.html)
+- GPU acceleration for large component sets (WebGL/WebGPU)
 - Spatial indexing (octree, BSP) for O(n log n) performance
-- Real-time visualisation integration
-- Multi-threaded processing for independent component pairs
+- Multi-threaded processing for independent component pairs (Web Workers)
+- WebAssembly port for near-native browser performance
+- 3D rendering with Three.js or Babylon.js
+- Export functionality (STL, OBJ, STEP formats)
 - Don't do any of the above and find a real job instead 🥲
