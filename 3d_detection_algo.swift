@@ -219,8 +219,10 @@ func findAndClassifyIntersections(in components: [Component3D]) {
                 // Handle non-coplanar, non-parallel case
                 let intersectionLine = findIntersectionLine(between: ci, and: cj)
 
-                let segmentsI = findLineComponentIntersections(line: intersectionLine, component: ci)
-                let segmentsJ = findLineComponentIntersections(line: intersectionLine, component: cj)
+                let segmentsI = findLineComponentIntersections(
+                    line: intersectionLine, component: ci)
+                let segmentsJ = findLineComponentIntersections(
+                    line: intersectionLine, component: cj)
 
                 let minCount = min(segmentsI.count, segmentsJ.count)
                 for k in 0..<minCount {

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Interactive 3D Component Intersection Detection and Joint Classification Algorithm Visualization">
+  <meta name="description"
+    content="Interactive 3D Component Intersection Detection and Joint Classification Algorithm Visualization">
   <title>3D Component Intersection Detection Algorithm</title>
   <link rel="stylesheet" href="demo.css">
 </head>
+
 <body>
   <!-- Main Header -->
   <header class="main-header">
@@ -36,14 +39,15 @@
         <div class="control-group">
           <button id="start-btn" class="btn btn-primary">
             <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M3 2v12l10-6z"/>
+              <path d="M3 2v12l10-6z" />
             </svg>
             Start Detection
           </button>
           <button id="reset-btn" class="btn btn-secondary">
             <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-              <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+              <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+              <path
+                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
             </svg>
             Reset
           </button>
@@ -54,15 +58,7 @@
             Animation Speed
             <span id="speed-value" class="control-value">800ms</span>
           </label>
-          <input
-            type="range"
-            id="animation-speed"
-            class="slider"
-            min="100"
-            max="2000"
-            value="800"
-            step="100"
-          >
+          <input type="range" id="animation-speed" class="slider" min="100" max="2000" value="800" step="100">
         </div>
 
         <div class="control-group">
@@ -98,8 +94,9 @@
         <div id="results-container" class="results-container">
           <div class="empty-state">
             <svg class="empty-icon" width="64" height="64" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-              <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
             </svg>
             <p>No results yet</p>
             <p class="empty-hint">Run the algorithm to see intersection analysis</p>
@@ -118,7 +115,8 @@
               the joints into three categories based on their geometric properties:
             </p>
             <ul class="info-list">
-              <li><strong class="joint-finger">Finger Joints:</strong> Both intersection segments lie on component edges</li>
+              <li><strong class="joint-finger">Finger Joints:</strong> Both intersection segments lie on component edges
+              </li>
               <li><strong class="joint-hole">Hole Joints:</strong> One segment is on an edge, the other is not</li>
               <li><strong class="joint-slot">Slot Joints:</strong> Neither segment lies on an edge</li>
             </ul>
@@ -161,4 +159,5 @@
   <!-- Load algorithm and visualization scripts -->
   <script type="module" src="demo.js"></script>
 </body>
+
 </html>
