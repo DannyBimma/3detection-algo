@@ -3,6 +3,8 @@
  * Using ncurses for terminal-based visualization
  */
 
+#define _POSIX_C_SOURCE 199309L
+
 #include <curses.h>
 #include <math.h>
 #include <stdio.h>
