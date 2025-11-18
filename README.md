@@ -10,6 +10,12 @@ Multi-language implementations of the 3D Component Intersection Detection and Jo
 - **[Lua](#lua-implementation)** - Lightweight scripting language implementation
 - **[Zig](#zig-implementation)** - Modern systems programming language implementation
 
+**Interactive Demos:**
+- **[Web Demo](#1-web-demo-standalone)** - Standalone web visualization (no installation)
+- **[C TUI Demo](#2-c-tui-demo-terminal)** - Terminal UI with ncurses
+- **[Zig TUI Demo](#3-zig-tui-demo-terminal)** - Modern Zig terminal UI
+- **[Swift macOS App](#4-swift-macos-native-app)** - Native macOS application with SwiftUI
+
 ![Original Algorithm](3d_algo_img.JPG)
 
 ## Quick Start
@@ -24,7 +30,11 @@ Choose the implementation that best fits your needs:
 | Build an iOS/macOS app | [Swift Implementation](#swift-implementation) |
 | Embed in a game or scripting engine | [Lua Implementation](#lua-implementation) |
 | Build a safe systems application | [Zig Implementation](#zig-implementation) |
-| Learn how the algorithm works | [Interactive Demo](#interactive-visualization-demo) |
+| **Try the algorithm interactively** | **[Interactive Demos](#interactive-demos--visualizations)** |
+| Run in a web browser | [Web Demo](#1-web-demo-standalone) |
+| Visualize in terminal (C) | [C TUI Demo](#2-c-tui-demo-terminal) |
+| Visualize in terminal (Zig) | [Zig TUI Demo](#3-zig-tui-demo-terminal) |
+| Use native macOS app | [Swift macOS App](#4-swift-macos-native-app) |
 
 ## Overview
 
@@ -1015,6 +1025,260 @@ The demo provides:
 - Dark-themed canvas for better contrast
 - Professional color scheme
 - Smooth animations and transitions
+
+---
+
+## Interactive Demos & Visualizations
+
+This repository includes four comprehensive interactive demos showcasing the algorithm in different environments:
+
+### 1. Web Demo (Standalone)
+
+**Location:** `demo-web/`
+
+A bundled, standalone version of the web demo that can be run independently.
+
+**Features:**
+- Self-contained with all dependencies
+- Works with `npx serve` (no installation required)
+- Full HTML5 Canvas visualization
+- Real-time algorithm log with timestamps
+- Interactive controls and configuration
+
+**Quick Start:**
+```bash
+cd demo-web
+npx serve .
+# Open http://localhost:3000
+```
+
+**Alternative methods:**
+```bash
+# Using npm
+npm install
+npm start
+
+# Using Python
+python3 -m http.server 8000
+```
+
+See [demo-web/README.md](demo-web/README.md) for full documentation.
+
+---
+
+### 2. C TUI Demo (Terminal)
+
+**Location:** `demo-tui-c/`
+
+Terminal-based interactive visualization using ncurses for a native CLI experience.
+
+**Features:**
+- Full-screen terminal UI with multiple panels
+- Real-time ASCII art 3D component visualization
+- Color-coded output (Finger/Hole/Slot joints)
+- Live algorithm log with scrolling
+- Status panel with statistics
+- Interactive keyboard controls
+
+**UI Layout:**
+```
+┌─────────────────────┬─────────────────────┐
+│  3D VISUALIZATION   │   ALGORITHM LOG     │
+│  [C1]  [C2]  [C3]  │   > Comparing...    │
+│  Components & Joints│   > Found joint     │
+└─────────────────────┴─────────────────────┘
+┌───────────────────────────────────────────┐
+│  STATUS: Running | Finger:2 Hole:1 Slot:3│
+└───────────────────────────────────────────┘
+┌───────────────────────────────────────────┐
+│  [SPACE] Start  [R] Reset  [Q] Quit      │
+└───────────────────────────────────────────┘
+```
+
+**Prerequisites:**
+```bash
+# Ubuntu/Debian
+sudo apt-get install libncurses5-dev libncurses-dev
+
+# macOS
+brew install ncurses
+```
+
+**Quick Start:**
+```bash
+cd demo-tui-c
+make
+./demo
+```
+
+**Controls:**
+- `SPACE` - Start/Pause execution
+- `R` - Reset to initial state
+- `+/-` - Adjust animation speed
+- `G` - Toggle grid display
+- `N` - Toggle normal vectors
+- `Q` - Quit
+
+See [demo-tui-c/README.md](demo-tui-c/README.md) for full documentation.
+
+---
+
+### 3. Zig TUI Demo (Terminal)
+
+**Location:** `demo-tui-zig/`
+
+Modern Zig implementation of the terminal UI demo with C interop for ncurses.
+
+**Features:**
+- Pure Zig with C bindings for ncurses
+- Memory-safe implementation with compile-time guarantees
+- Identical UI/UX to C TUI demo
+- Cross-compilation support
+- Modern async/await patterns (Zig-style)
+
+**Prerequisites:**
+- Zig 0.11.0 or later
+- ncurses library (same as C TUI demo)
+
+**Quick Start:**
+```bash
+cd demo-tui-zig
+zig build run
+```
+
+**Alternative builds:**
+```bash
+# Release build with optimizations
+zig build -Doptimize=ReleaseFast
+
+# Smaller binary
+zig build -Doptimize=ReleaseSmall
+
+# Direct compilation
+zig build-exe demo.zig -lc -lncurses
+```
+
+**Cross-compilation:**
+```bash
+# For Linux x86_64
+zig build -Dtarget=x86_64-linux
+
+# For macOS ARM64
+zig build -Dtarget=aarch64-macos
+```
+
+See [demo-tui-zig/README.md](demo-tui-zig/README.md) for full documentation.
+
+---
+
+### 4. Swift macOS Native App
+
+**Location:** `demo-macos-swift/`
+
+Native macOS application with SwiftUI providing a polished graphical interface.
+
+**Features:**
+- Native macOS app with SwiftUI
+- Modern, responsive graphical interface
+- Real-time 3D component visualization with animations
+- Split-view layout: Canvas, Log, Status, Controls
+- Dark Mode support (auto-adapts to system)
+- Smooth native animations and transitions
+- Keyboard shortcuts support
+
+**UI Preview:**
+```
+┌─────────────────────────────────────────────────┐
+│         3D Visualization (Graphical)            │
+│  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐ │
+│  │ C1  │  │ C2  │  │ C3  │  │ C4  │  │ C5  │ │
+│  │  ↑  │  │  ↑  │  │  ↑  │  │  ↑  │  │  ↑  │ │
+│  │┌───┐│  │┌───┐│  │┌───┐│  │┌───┐│  │┌───┐│ │
+│  ││   ││  ││   ││  ││   ││  ││   ││  ││   ││ │
+│  │└───┘│  │└───┘│  │└───┘│  │└───┘│  │└───┘│ │
+│  └─────┘  └─────┘  └─────┘  └─────┘  └─────┘ │
+│  Progress: ████████░░░░░░░░░░  10/15          │
+├─────────────────────────────────────────────────┤
+│  Algorithm Log          │  Status & Controls    │
+│  🔵 Algorithm started   │  Components: 5        │
+│  🔵 Comparing C1<->C2  │  🟢 2  🟠 1  🔴 3   │
+│  🟢 Intersection found  │  [Pause] [Reset]      │
+│  🟢 FINGER joint        │  Speed: ●─────  0.5s │
+│  ...                    │  ☑ Grid ☑ Normals    │
+└─────────────────────────────────────────────────┘
+```
+
+**Requirements:**
+- macOS 12.0 (Monterey) or later
+- Xcode 13.0+ or Swift 5.5+
+
+**Quick Start:**
+
+*Option 1: Command Line*
+```bash
+cd demo-macos-swift
+./build.sh
+./Demo3DDetection
+```
+
+*Option 2: Xcode*
+1. Create new macOS App project
+2. Choose SwiftUI interface
+3. Replace ContentView.swift with Demo3DDetectionApp.swift
+4. Click Run (⌘R)
+
+*Option 3: Swift Package*
+```bash
+swift run
+```
+
+**Keyboard Shortcuts:**
+- `⌘R` - Start/Resume algorithm
+- `⌘P` - Pause algorithm
+- `⌘⇧R` - Reset
+- `⌘+/-` - Adjust speed
+- `⌘Q` - Quit
+
+See [demo-macos-swift/README.md](demo-macos-swift/README.md) for full documentation.
+
+---
+
+### Demo Comparison
+
+| Feature | Web Demo | C TUI | Zig TUI | Swift macOS |
+|---------|----------|-------|---------|-------------|
+| **Platform** | Browser | Terminal | Terminal | macOS only |
+| **Installation** | None (npx) | ncurses | Zig + ncurses | macOS 12+ |
+| **Graphics** | Canvas 2D | ASCII Art | ASCII Art | Native GUI |
+| **Colors** | Full RGB | 8 colors | 8 colors | Full RGB |
+| **Mouse** | ✅ | ❌ | ❌ | ✅ |
+| **Keyboard** | ✅ | ✅ | ✅ | ✅ |
+| **Portable** | ✅ | ✅ (Unix) | ✅ (Unix) | ❌ (macOS) |
+| **Performance** | Good | Excellent | Excellent | Excellent |
+| **Compilation** | None | Required | Required | Required |
+| **Best For** | Sharing | Servers | Modern CLI | Mac users |
+
+### Running All Demos
+
+**Web Demo:**
+```bash
+cd demo-web && npx serve .
+```
+
+**C TUI Demo:**
+```bash
+cd demo-tui-c && make && ./demo
+```
+
+**Zig TUI Demo:**
+```bash
+cd demo-tui-zig && zig build run
+```
+
+**Swift macOS Demo:**
+```bash
+cd demo-macos-swift && ./build.sh && ./Demo3DDetection
+```
 
 ## Algorithm Performance & Analysis
 
