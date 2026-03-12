@@ -17,46 +17,45 @@
 #define MAX_SEGMENTS 100
 #define MAX_JOINTS 500
 
-/* 3D Vector */
+// 3D Vector
 typedef struct {
   double x, y, z;
 } Vector3D;
 
-/* 3D Transformation Matrix (4x4 homogeneous) */
+// 3D Transformation Matrix (4x4 homogeneous)
 typedef struct {
   double m[4][4];
 } Matrix4x4;
 
-/* Line segment in 3D space */
+// Line segment in 3D space
 typedef struct {
   Vector3D start;
   Vector3D end;
 } Segment3D;
 
-/* Dynamic array for segments */
+// Dynamic array for storing segments in 3D space
 typedef struct {
   Segment3D *data;
   int count;
   int capacity;
 } SegmentArray;
 
-/* Types of joint... !marijuana */
+// Joint types
 typedef enum { FINGER_JOINT, HOLE_JOINT, SLOT_JOINT } JointType;
 
-/* Joints */
 typedef struct {
   JointType type;
   Segment3D segment;
 } Joint;
 
-/* Dynamic array for joints */
+// Dynamic array for storing joints
 typedef struct {
   Joint *data;
   int count;
   int capacity;
 } JointArray;
 
-/* 3D Component */
+// 3D Component identification
 typedef struct {
   int id;
   Vector3D *vertices;
@@ -69,14 +68,14 @@ typedef struct {
   JointArray slots;
 } Component3D;
 
-/* Component collection */
+// Component collection
 typedef struct {
   Component3D *components;
   int count;
   int capacity;
 } ComponentArray;
 
-/* Function prototypes */
+// Function prototypes
 static inline double dot_product(const Vector3D *a, const Vector3D *b);
 static inline Vector3D cross_product(const Vector3D *a, const Vector3D *b);
 static inline double vector_magnitude(const Vector3D *v);
@@ -117,7 +116,8 @@ int detect_component_intersections(ComponentArray *components);
 int main(void) {
   ComponentArray *components = create_component_array(10);
   if (!components) {
-    fprintf(stderr, "ERROR: Creation of component array utterly failed\n");
+    fprintf(stderr,
+            "ERROR: Creation of component array failed successfully!!\n");
 
     return 1;
   }
