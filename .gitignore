@@ -51,6 +51,21 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# Demo binaries
+demo-tui-c/demo
+demo-tui-zig/demo
+Demo3DDetection
+
+# Zig build artifacts
+zig-cache/
+zig-out/
+
+# Node modules
+node_modules/
+
+# macOS
+.DS_Store
+
 # debug information files
 *.dwo
 

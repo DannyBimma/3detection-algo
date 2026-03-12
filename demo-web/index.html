@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Interactive 3D Component Intersection Detection and Joint Classification Algorithm Visualization">
+  <title>3D Component Intersection Detection Algorithm</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+
+<body>
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="container">
+      <h1 class="header-title">3D Component Intersection Detection</h1>
+      <p class="header-subtitle">Real-time Joint Classification Algorithm Visualization</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Visualization Area -->
+      <section class="visualization-section">
+        <h2 class="section-title">3D Visualization</h2>
+        <div class="canvas-container">
+          <canvas id="visualization-canvas" width="800" height="600"></canvas>
+          <div class="canvas-overlay">
+            <div id="current-step" class="step-indicator">Ready to start</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Control Panel -->
+      <aside class="control-panel">
+        <h2 class="section-title">Controls</h2>
+        <div class="control-group">
+          <button id="start-btn" class="btn btn-primary">
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M3 2v12l10-6z" />
+            </svg>
+            Start Detection
+          </button>
+          <button id="reset-btn" class="btn btn-secondary">
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+              <path
+                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+            </svg>
+            Reset
+          </button>
+        </div>
+
+        <div class="control-group">
+          <label for="animation-speed" class="control-label">
+            Animation Speed
+            <span id="speed-value" class="control-value">800ms</span>
+          </label>
+          <input type="range" id="animation-speed" class="slider" min="100" max="2000" value="800" step="100">
+        </div>
+
+        <div class="control-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-normals" class="checkbox" checked>
+            <span>Show Normal Vectors</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="show-grid" class="checkbox" checked>
+            <span>Show Grid</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="auto-rotate" class="checkbox">
+            <span>Auto Rotate</span>
+          </label>
+        </div>
+      </aside>
+
+      <!-- Algorithm Log -->
+      <section class="log-section">
+        <h2 class="section-title">Algorithm Log</h2>
+        <div id="algorithm-log" class="log-container">
+          <div class="log-entry log-info">
+            <span class="log-time">00:00:00</span>
+            <span class="log-message">System ready. Click "Start Detection" to begin.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results Display -->
+      <section class="results-section">
+        <h2 class="section-title">Detection Results</h2>
+        <div id="results-container" class="results-container">
+          <div class="empty-state">
+            <svg class="empty-icon" width="64" height="64" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+            </svg>
+            <p>No results yet</p>
+            <p class="empty-hint">Run the algorithm to see intersection analysis</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Algorithm Info -->
+      <section class="info-section">
+        <h2 class="section-title">About the Algorithm</h2>
+        <div class="info-content">
+          <div class="info-card">
+            <h3 class="info-card-title">What it does</h3>
+            <p>
+              This algorithm detects intersections between 3D planar components and classifies
+              the joints into three categories based on their geometric properties:
+            </p>
+            <ul class="info-list">
+              <li><strong class="joint-finger">Finger Joints:</strong> Both intersection segments lie on component edges
+              </li>
+              <li><strong class="joint-hole">Hole Joints:</strong> One segment is on an edge, the other is not</li>
+              <li><strong class="joint-slot">Slot Joints:</strong> Neither segment lies on an edge</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3 class="info-card-title">Applications</h3>
+            <ul class="info-list">
+              <li>CAD/CAM assembly planning</li>
+              <li>Timber framing and joinery</li>
+              <li>3D printing support generation</li>
+              <li>Robotic grasping and manipulation</li>
+              <li>Manufacturing tool path generation</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3 class="info-card-title">Implementation</h3>
+            <p>
+              This browser-based implementation uses modern JavaScript (ES6+) with an
+              event-driven architecture for real-time visualization. The algorithm
+              processes component pairs in O(n²) time complexity.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <p>&copy; 2024 3D Detection Algorithm | Browser Implementation</p>
+      <p class="footer-links">
+        <a href="https://github.com/yourusername/3detection-algo" target="_blank">View on GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Load algorithm and visualization scripts -->
+  <script type="module" src="demo.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "3d-detection-algo-demo",
+  "version": "1.0.0",
+  "description": "Interactive web demo for 3D Component Intersection Detection and Joint Classification Algorithm",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve . -p 8000"
+  },
+  "keywords": [
+    "3d",
+    "geometry",
+    "intersection",
+    "joint-classification",
+    "algorithm",
+    "visualization"
+  ],
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
